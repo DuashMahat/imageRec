@@ -14,7 +14,6 @@ import Social
 class ViewController: UIViewController , UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     var str : String = "Most Likely 1: ", str2  = "Most Likely 2: "
     let imgpicker = UIImagePickerController()
-    var classificationResults : [VNClassificationObservation] = []
 //     var secondRes : VNClassificationObservation
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +60,7 @@ class ViewController: UIViewController , UIImagePickerControllerDelegate , UINav
     func detectImage (image : CIImage)  {
       
         guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
-            fatalError("No image to be found")
+            fatalError("No image ")
         }
     
         let request = VNCoreMLRequest(model: model) { request, error in
@@ -70,7 +69,7 @@ class ViewController: UIViewController , UIImagePickerControllerDelegate , UINav
             guard let results = request.results as? [VNClassificationObservation],
                 let firstIndexRes = results.first
                 else {
-                    fatalError("unexpected result type from VNCoreMLRequest")
+                    fatalError("error from VNCoreMLRequest")
             }
             print(results)
               print("====")
